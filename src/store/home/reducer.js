@@ -24,7 +24,7 @@ const hackerNewsReducer = (state = initialState, action) => {
       state.loading = false;
       state.hackerNewsData = action.data;
       state.hackerNewsGraphData = action.data.hackerNewsGraphData;
-      console.log('@2642873462783467234', state.hackerNewsData, state.hackerNewsGraphData);
+      console.log('@2642873462467234', state.hackerNewsData, state.hackerNewsGraphData);
       return state;
     }
     case hackerNewsActionTypes.FETCH_DATA_ERROR: {
