@@ -7,7 +7,12 @@ function* handleFetch(requets) {
     const { payload } = requets;
     try {
         const response = yield call(api.searchStories, payload);  
-        yield put({ type: 'FETCH_DATA_SUCCESS', response});
+        const hackerNewsGraphData =[];
+        response.data.hits.map((data=>
+           hackerNewsGraphData.push({name: data.objectID, uv: data.points, pv: 2400, amt: 2400})
+        ))
+        const data = {...response.data, hackerNewsGraphData};
+        yield put({ type: 'FETCH_DATA_SUCCESS', data });
     } catch (err) {
        yield put({type: 'FETCH_DATA_ERROR', ...err});
     }

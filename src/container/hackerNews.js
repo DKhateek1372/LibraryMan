@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchDataRequest, updateVoteCountRequest } from '../store/home/actions';
@@ -12,6 +12,7 @@ import '../styles/index.css';
 
 const hackerNews = (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  console.log('this one is loading')
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
   const [prevActive, setPrevActive] = useState(true);
@@ -32,13 +33,28 @@ const hackerNews = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    const indexOfLastTodo = pageNumber * dataPerPage;
-    const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
-    !!hackerNewsData &&
-      hackerNewsData.hits &&
-      hackerNewsData.hits.length > 0 &&
-      hackerNewsData.hits.slice(indexOfFirstTodo, indexOfLastTodo);
-  }, [dataPerPage, hackerNewsData, pageNumber]);
+
+    //for pagination if all the data is loaded
+    // const indexOfLastTodo = pageNumber * dataPerPage;
+    // const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
+    // !!hackerNewsData && !!hackerNewsData.hits && hackerNewsData.hits.length > 0 && hackerNewsData.hits.slice(indexOfFirstTodo, indexOfLastTodo);
+
+  }, []);
+
+
+  const dispatchMyAction = useCallback(() => {
+    const maxPageNumber = pageNumber <= 0 ? 1: pageNumber;
+    dispatch(fetchDataRequest({id: maxPageNumber}));
+    props.history.push({
+      pathname: maxPageNumber,
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ pageNumber ])
+
+  useEffect(() => {
+    console.log('whats the pagenumber', pageNumber);
+    dispatchMyAction()
+  }, [dispatchMyAction, pageNumber]);
 
   const handleScroll = () => {
     window.scrollTo(0, 400);
@@ -55,33 +71,23 @@ const hackerNews = (props) => {
     hackerNewsData.hits[index].points = hackerNewsData.hits[index].points + 1;
     const params = { hackerNewsData: hackerNewsData, key: index };
     dispatch(updateVoteCountRequest(params));
+    console.log('@2642873462783467234',hackerNewsData, hackerNewsGraphData);
   };
 
   const GoToPrevious = () => {
     setNextActive(false);
     setPrevActive(true);
-    setPageNumber(pageNumber - 1);
+    setPageNumber((pageNumber)=> pageNumber - 1);
     setDataPerPage(10);
-    const target = pageNumber <= 0 ? 1 : `${pageNumber}`;
-    props.history.push({
-      pathname: target,
-    });
-    const params = { id: target };
-    dispatch(fetchDataRequest(params));
   };
 
   const GoToNext = () => {
     setPrevActive(false);
     setNextActive(true);
-    setPageNumber(pageNumber + 1);
+    setPageNumber((pageNumber)=> pageNumber + 1);
     setDataPerPage(10);
-    const target = `${pageNumber}`;
-    props.history.push({
-      pathname: target,
-    });
-    const params = { id: target };
-    dispatch(fetchDataRequest(params));
   };
+
 
   return (
     <Container fluid>
@@ -154,7 +160,7 @@ const hackerNews = (props) => {
                   })
                 ) : (
                       <tr className="spinnerName">
-                        <td>
+                        <td className="DataImage">
                           <img src={Images.NoData} alt="nodata" className="NoDataImage" />
                         </td>
                       </tr>

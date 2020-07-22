@@ -59,6 +59,7 @@ table {
     text-align: left;
     padding: 1rem;
   }
+
   
   tr:nth-child(even) {
     background-color: #dddddd;
@@ -172,6 +173,11 @@ table {
 
 .mr-2 {
     margin-right: .5rem;
+}
+
+.DataImage{
+    text-align: center;
+    padding: 1rem; 
 }
 
 .NoDataImage{
