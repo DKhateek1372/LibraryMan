@@ -3,7 +3,8 @@ import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import CustomRoute from './router/index';
+import { Route } from 'react-router-dom';
+import hackerNews from './container/hackerNews';
 import {store, persistor} from './store/configureStore';
 import './App.css';
 
@@ -14,7 +15,7 @@ function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <BrowserRouter>
-          <CustomRoute history={history} />
+         <Route exact path="/:id" component={hackerNews}/>
         </BrowserRouter>
       </PersistGate>
     </Provider>
