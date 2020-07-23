@@ -2,8 +2,7 @@ const utils = {
     deviceIsWeb: window.innerWidth >= 680,
    
     checkAPIfailure: res => {
-        console.log('checkresponse',res, res.hasOwnProperty('data') , res.status)
-        res = res.hasOwnProperty('data') ? res.data : res;
+         res = res.hasOwnProperty('data') ? res.data : res;
         if (!!res && res.hasOwnProperty('status') && res.status !== 200) {
             return res.data;
         } else {

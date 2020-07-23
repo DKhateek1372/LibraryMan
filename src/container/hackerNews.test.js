@@ -1,7 +1,7 @@
 import React from 'react';
 import { listItemData } from '../../data-for-testing';
-import { shallow } from 'enzyme';
 import hackerNews from './hackerNews';
+import { shallow } from 'enzyme';
 const { author, children, score, url, title, objectID, type, Comments } = listItemData;
 
 it('renders without crashing', () => {
