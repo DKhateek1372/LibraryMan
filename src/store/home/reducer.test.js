@@ -1,24 +1,46 @@
-import hackerNewsReducer from './reducer';
-import { hackerNewsActionTypes, hackerNewsVoteCountActionTypes } from '../constants';
+import reducer from './reducer';
+import { hackerNewsActionTypes } from '../constants';
+import listItemData from '../../../data-for-testing';
+
+const initialState = {
+  initialState: true,
+  hackerNewsData: {},
+  hackerNewsGraphData: [],
+  hackerNewsUserData: {},
+};
+
+console.log(1231231231, reducer);
 
 describe('hackerNewsReducer reducer', () => {
+ 
+  it('returns the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(initialState);
+  });
+
   it('should return the initial state', () => {
-    expect(hackerNewsReducer({},{
-        type: hackerNewsActionTypes.FETCH_DATA_REQUEST,
-    })).toEqual({
-      loading: hackerNewsReducer.loading,
-      hackerNewsData: hackerNewsReducer.hackerNewsData,
+    expect(reducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_REQUEST })).toEqual({
+      ...initialState,
+      isLoading: true,
     });
   });
 
-  it('should handle change', () => {
-    expect(
-        hackerNewsReducer({}, {
-        type: hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST,
-      }),
-    ).toEqual({
-        loading: hackerNewsReducer.loading,
-        hackerNewsData: hackerNewsReducer.hackerNewsData,
+  it('should return the initial state', () => {
+    expect(reducer(initialState,{
+        type: hackerNewsActionTypes.FETCH_DATA_SUCCESS,
+        payload: { hackerNewsData: listItemData}
+    })).toEqual({
+      loading: initialState.isLoading,
+      hackerNewsData:listItemData,
     });
   });
+
+  it('handles login failure', () => {
+    expect(reducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_ERROR  })).toEqual({
+      ...initialState,
+      dataError:
+        'Sorry, it looks like the Username and/or Password you provided does not match our records',
+    });
+  });
+  
 });
+

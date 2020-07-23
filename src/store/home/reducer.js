@@ -10,8 +10,6 @@ const initialState = {
   hackerNewsData: {},
   hackerNewsGraphData: [],
   hackerNewsUserData: {},
-  activePage: 1,
-  dataPerPage: 1,
 };
 
 const hackerNewsReducer = (state = initialState, action) => {
