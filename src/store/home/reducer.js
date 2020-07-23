@@ -8,13 +8,13 @@ import {
 const initialState = {
   loading: true,
   hackerNewsData: {},
-  hackerNewsGraphData: [],
-  hackerNewsUserData: {},
+  hackerNewsGraphData: []
 };
 
 const hackerNewsReducer = (state = initialState, action) => {
 
   // fecth initial data from search //
+  console.log('hey yo are getting graph data' ,action,  action.data);
   switch (action.type) {
     case hackerNewsActionTypes.FETCH_DATA_REQUEST: {
       return { ...state, loading: true };
@@ -26,7 +26,7 @@ const hackerNewsReducer = (state = initialState, action) => {
       return state;
     }
     case hackerNewsActionTypes.FETCH_DATA_ERROR: {
-      return { ...state, loading: true, errors: action };
+      return { ...state, loading: true, errors: '' };
     }
 
     // update vote count //

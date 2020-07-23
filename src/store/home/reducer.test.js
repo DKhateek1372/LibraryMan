@@ -1,44 +1,51 @@
-import reducer from './reducer';
+import hackerNewsReducer from './reducer';
 import { hackerNewsActionTypes } from '../constants';
 import listItemData from '../../../data-for-testing';
 
 const initialState = {
-  initialState: true,
+  loading: true,
   hackerNewsData: {},
   hackerNewsGraphData: [],
-  hackerNewsUserData: {},
 };
 
-console.log(1231231231, reducer);
+console.log(1231231231, hackerNewsReducer, hackerNewsReducer(undefined, {}),
+hackerNewsReducer(initialState,{
+  type: hackerNewsActionTypes.FETCH_DATA_SUCCESS,
+})
+);
 
 describe('hackerNewsReducer reducer', () => {
  
   it('returns the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
-  });
-
-  it('should return the initial state', () => {
-    expect(reducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_REQUEST })).toEqual({
-      ...initialState,
-      isLoading: true,
+    expect(hackerNewsReducer(undefined, {})).toEqual({
+      loading: true,
+      hackerNewsData: {},
+      hackerNewsGraphData: [],
     });
   });
 
   it('should return the initial state', () => {
-    expect(reducer(initialState,{
+    expect(hackerNewsReducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_REQUEST })).toEqual({
+      ...initialState,
+      loading: true,
+    });
+  });
+
+  it('should return the updated data state', () => {
+    expect(hackerNewsReducer(initialState,{
         type: hackerNewsActionTypes.FETCH_DATA_SUCCESS,
-        payload: { hackerNewsData: listItemData}
-    })).toEqual({
-      loading: initialState.isLoading,
+     })).toEqual({
+      loading: false,
       hackerNewsData:listItemData,
+      hackerNewsGraphData: listItemData.hackerNewsGraphData
     });
   });
 
-  it('handles login failure', () => {
-    expect(reducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_ERROR  })).toEqual({
+  it('handles failure', () => {
+    expect(hackerNewsReducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_ERROR  })).toEqual({
       ...initialState,
-      dataError:
-        'Sorry, it looks like the Username and/or Password you provided does not match our records',
+      loading: true,
+      errors: '',
     });
   });
   

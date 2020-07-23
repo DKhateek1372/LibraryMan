@@ -3,7 +3,7 @@ export const listItemData = [
     by: 'Mr NOBODY',
     comments: 41,
     objectID: 18277531,
-    children: [],
+    hits: [],
     score: 79,
     time: 1540236259,
     title: 'AWS CEO Jassy follows Apple in calling for retraction of Chinese spy chip story',
@@ -20,12 +20,13 @@ export const listItemData = [
     story_text: null,
     story_title: null,
     story_url: null,
+    hackerNewsGraphData:[]
   },
   {
     by: 'Deepak DK',
     comments: 72,
     objectID: 18276862,
-    children: [],
+    hits: [],
     score: 105,
     time: 1540231727,
     title: 'The Secretive Business of Facial-Recognition Software in Retail Stores',
@@ -42,11 +43,12 @@ export const listItemData = [
     story_text: null,
     story_title: null,
     story_url: null,
+    hackerNewsGraphData:[]
   },
   {
     by: 'Sangha',
     comments: 89,
-    children: [  ],
+    hits: [  ],
     score: 58,
     url:
       'http://nymag.com/intelligencer/2018/10/retailers-are-using-facial-recognition-technology-too.html',
@@ -64,5 +66,6 @@ export const listItemData = [
     story_text: null,
     story_title: null,
     story_url: null,
+    hackerNewsGraphData:[]
   },
 ];
