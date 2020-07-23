@@ -2,6 +2,7 @@ import {
   hackerNewsActionTypes,
   hackerNewsUserActionTypes,
   hackerNewsVoteCountActionTypes,
+  hackerNewsDeleteActionTypes
 } from '../constants';
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
 };
 
 const hackerNewsReducer = (state = initialState, action) => {
- 
+
   // fecth initial data from search //
   switch (action.type) {
     case hackerNewsActionTypes.FETCH_DATA_REQUEST: {
@@ -24,7 +25,6 @@ const hackerNewsReducer = (state = initialState, action) => {
       state.loading = false;
       state.hackerNewsData = action.data;
       state.hackerNewsGraphData = action.data.hackerNewsGraphData;
-      console.log('@2642873462467234', state.hackerNewsData, state.hackerNewsGraphData);
       return state;
     }
     case hackerNewsActionTypes.FETCH_DATA_ERROR: {
@@ -42,6 +42,21 @@ const hackerNewsReducer = (state = initialState, action) => {
       return state;
     }
     case hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_ERROR: {
+      return { ...state, loading: true, errors: action };
+    }
+
+
+    // update vote count //
+    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_SUCCESS: {
+      state.loading = false;
+      state.hackerNewsData.hits.splice(action.index,1);
+      state.hackerNewsData.hackerNewsGraphData.splice(action.index,1);
+      return state;
+    }
+    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_ERROR: {
       return { ...state, loading: true, errors: action };
     }
 

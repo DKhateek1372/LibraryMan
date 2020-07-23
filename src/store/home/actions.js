@@ -1,4 +1,4 @@
-import { hackerNewsActionTypes, hackerNewsUserActionTypes, hackerNewsVoteCountActionTypes } from '../constants';
+import { hackerNewsActionTypes, hackerNewsUserActionTypes, hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes } from '../constants';
 
 // export named actions
 export const fetchDataRequest = params => {
@@ -53,3 +53,21 @@ export const updateVoteCountError = message => ({
     type: hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_ERROR,
     payload: message 
 });
+
+
+export const deletehackerNewDataRequest = params => 
+ ({ 
+     type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST, 
+     payload: params 
+ });
+export const deletehackerNewDataSuccess = data => 
+({ 
+    type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_SUCCESS,
+    payload: data 
+});
+export const deletehackerNewDataError = message => ({ 
+    type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_ERROR,
+    payload: message 
+});
+
+

@@ -112,6 +112,13 @@ table {
     color: rgba(255,255,255,var(--text-opacity));
 }
 
+.aboutme{
+    --text-opacity: 1;
+    color: #f60;
+    color: rgba(255,102,0,var(--text-opacity));
+    text-decoration: none;
+}
+
 .mt-6 {
     margin-top: 1.5rem;
 }
@@ -131,6 +138,15 @@ table {
 
 .break-all {
     word-break: break-all;
+}
+.ml-2 {
+    margin-left: .5rem;
+}
+
+.text-hn-gray {
+    --text-opacity: 1;
+    color: #828282;
+    color: rgba(130,130,130,var(--text-opacity));
 }
 
 .recharts-wrapper{
@@ -208,4 +224,13 @@ table {
 .spinnerName {
     width: 200px;
     height: 300px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+td a {
+        color: inherit;
+        text-decoration: inherit;
 }

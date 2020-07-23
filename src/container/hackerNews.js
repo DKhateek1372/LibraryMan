@@ -3,9 +3,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchDataRequest, updateVoteCountRequest } from '../store/home/actions';
 import { Container, Col, Row } from 'react-bootstrap';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label , ResponsiveContainer} from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label } from 'recharts';
+import  ResponsiveContainer  from '../components/ResponsiveContainer/responsiveContainer';
+import { fetchDataRequest, updateVoteCountRequest, deletehackerNewDataRequest } from '../store/home/actions';
 import Icons from '../themes/icons';
 import Images from '../themes/images';
 import '../styles/index.css';
@@ -34,10 +35,9 @@ const hackerNews = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    //for pagination if all the data is loaded
-    // const indexOfLastTodo = pageNumber * dataPerPage;
-    // const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
-    // !!hackerNewsData && !!hackerNewsData.hits && hackerNewsData.hits.length > 0 && hackerNewsData.hits.slice(indexOfFirstTodo, indexOfLastTodo);
+    const indexOfLastTodo = pageNumber * dataPerPage;
+    const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
+    !!hackerNewsData && !!hackerNewsData.hits && hackerNewsData.hits.length > 0 && hackerNewsData.hits.slice(indexOfFirstTodo, indexOfLastTodo);
 
   }, []);
 
@@ -71,7 +71,6 @@ const hackerNews = (props) => {
     hackerNewsData.hits[index].points = hackerNewsData.hits[index].points + 1;
     const params = { hackerNewsData: hackerNewsData, key: index };
     dispatch(updateVoteCountRequest(params));
-    console.log('@2642873462783467234',hackerNewsData, hackerNewsGraphData);
   };
 
   const GoToPrevious = () => {
@@ -88,6 +87,10 @@ const hackerNews = (props) => {
     setDataPerPage(10);
   };
 
+  const removeNews =(item, index) =>{
+    const params = { index : index}
+    dispatch(deletehackerNewDataRequest(params));
+  } 
 
   return (
     <Container fluid>
@@ -96,11 +99,11 @@ const hackerNews = (props) => {
           <Col className="p-4 text-hn-orange flex items-center justify-between">
             <h1 className="text-3xl">Hacker News</h1>{' '}
             <div className="hackerMenu">
-              <h3 className="text-xl" onClick={() => handleScroll()}>
+              <h3 className="text-xl cursor-pointer" onClick={() => handleScroll()}>
                 Chart
               </h3>
-              <h3 className="text-xl">
-                About Me
+              <h3 className="text-xl cursor-pointer">
+                <a href="https://www.linkedin.com/in/deepakhateek13/" target="blank" className="aboutme"> About Me</a>
               </h3>
             </div>
           </Col>
@@ -148,12 +151,13 @@ const hackerNews = (props) => {
                         <td onClick={() => voteCount(index)}>
                           <img alt="upVote" src={Icons.vote} width="20px" height="20px" />
                         </td>
-                        <td>
-                          {`${item._highlightResult.title.value
-                            .replace(/<\s*br[^>]?>/, '\n')
-                            .replace(/(<([^>]+)>)/g, '')}
-                                ${item.url}
-                                ${'by '+ item._highlightResult.author.value}`}
+                        <td className="cursor-pointer">
+                          <a href={item.url}>
+                            {item._highlightResult.title.value}
+                          </a>
+                         <span className="ml-2 text-hn-gray break-all">  { ' ' + item.url + ' '} </span>
+                          {'by '+ item._highlightResult.author.value + ' '}
+                          <span onClick={() => removeNews(hackerNewsData.hits, index)}>[Hide]</span>
                         </td>
                       </tr>
                     );
@@ -197,11 +201,9 @@ const hackerNews = (props) => {
         <Col className="p-4">
           <h1 className="text-hn-orange">Chart</h1>
         </Col>
-        <Col lg={12}>
-        {/* <ResponsiveContainer width={700} height="80%"> */}
+        <Col lg={12} style={{ width: '100%', height: 300 }}>
+        <ResponsiveContainer>
         <LineChart
-            width={1200}
-            height={300}
             data={hackerNewsGraphData.length > 0 && hackerNewsGraphData}
             margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
           >
@@ -213,13 +215,12 @@ const hackerNews = (props) => {
             <YAxis label={{ value: 'votes', angle: -90, position: 'insideLeft' }} />
             <Tooltip />
           </LineChart>
-          {/* </ResponsiveContainer> */}
+          </ResponsiveContainer>
         </Col>
       </Row>
     </Container>
   );
 };
-
 
 hackerNews.propTypes = {
   author: PropTypes.string,

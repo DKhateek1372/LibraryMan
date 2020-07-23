@@ -1,7 +1,7 @@
 import { call, all, put, takeLatest } from 'redux-saga/effects';
 import api from '../../services/index';
 
-import {  hackerNewsActionTypes , hackerNewsVoteCountActionTypes } from '../constants';
+import {  hackerNewsActionTypes , hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes } from '../constants';
 
 function* handleFetch(requets) {
     const { payload } = requets;
@@ -28,9 +28,20 @@ function* handleUpdateVoteCount(requets) {
     }
 }
 
+function* handleDeleteData(requets) {
+  const { payload } = requets;
+   console.log('345345345345', 'i am calling 1', payload);
+   try {
+    yield put({ type: 'HACKER_NEWS_DELETE_DATA_SUCCESS', ...payload});
+  } catch (err) {
+    yield put({type: 'HACKER_NEWS_DELETE_DATA_ERROR', ...err});
+  }
+}
+
 export function* hackerNewsData() {     
     yield all([
         yield takeLatest(hackerNewsActionTypes.FETCH_DATA_REQUEST, handleFetch),
-        yield takeLatest(hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST, handleUpdateVoteCount)
+        yield takeLatest(hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST, handleUpdateVoteCount), 
+        yield takeLatest(hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST, handleDeleteData)
       ]);
 }
