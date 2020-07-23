@@ -8,11 +8,9 @@ const initialState = {
   hackerNewsGraphData: [],
 };
 
-console.log(1231231231, hackerNewsReducer, hackerNewsReducer(undefined, {}),
-hackerNewsReducer(initialState,{
-  type: hackerNewsActionTypes.FETCH_DATA_SUCCESS,
-})
-);
+console.log(1231231231, hackerNewsReducer, hackerNewsReducer(undefined, {}));
+
+console.log('here if condition is true', hackerNewsReducer(initialState,{  type: hackerNewsActionTypes.FETCH_DATA_SUCCESS}))
 
 describe('hackerNewsReducer reducer', () => {
  
