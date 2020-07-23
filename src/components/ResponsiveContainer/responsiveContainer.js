@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactResizeDetector from 'react-resize-detector';
 import _ from 'lodash';
-// import {isPercent} from './dataUtils';
 import {warn} from './logUtils';
 
 class ResponsiveContainer extends Component {
