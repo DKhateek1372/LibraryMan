@@ -29,7 +29,7 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "yarn global add serve && serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
