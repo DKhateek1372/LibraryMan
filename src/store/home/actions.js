@@ -1,4 +1,4 @@
-import { hackerNewsActionTypes, hackerNewsUserActionTypes, hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes } from '../constants';
+import { hackerNewsActionTypes, hackerNewsUserActionTypes, hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes, hackerNewsUpdatePresistTypes } from '../constants';
 
 // export named actions
 export const fetchDataRequest = params => {
@@ -70,4 +70,20 @@ export const deletehackerNewDataError = message => ({
     payload: message 
 });
 
+
+
+export const updatePresistDataRequest = params => 
+ ({ 
+     type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_REQUEST, 
+     payload: params 
+ });
+export const updatePresistDataSuccess = data => 
+({ 
+    type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_SUCCESS,
+    payload: data 
+});
+export const updatePresistDataError = message => ({ 
+    type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_ERROR,
+    payload: message 
+});
 

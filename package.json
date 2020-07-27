@@ -10,6 +10,7 @@
     "connected-react-router": "^6.8.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
     "history": "^5.0.0",
     "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
@@ -31,10 +32,12 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "start": "yarn global add serve && serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
+    "format": "./node_modules/.bin/prettier --write \"src/**/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": "react-app"

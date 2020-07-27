@@ -13,7 +13,7 @@ const history = createBrowserHistory();
 function App() {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
          <Route exact path="/:id" component={hackerNews}/>
         </BrowserRouter>

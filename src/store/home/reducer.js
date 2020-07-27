@@ -2,7 +2,8 @@ import {
   hackerNewsActionTypes,
   hackerNewsUserActionTypes,
   hackerNewsVoteCountActionTypes,
-  hackerNewsDeleteActionTypes
+  hackerNewsDeleteActionTypes,
+  hackerNewsUpdatePresistTypes
 } from '../constants';
 
 const initialState = {
@@ -14,17 +15,19 @@ const initialState = {
 const hackerNewsReducer = (state = initialState, action) => {
 
   // fecth initial data from search //
-  console.log('hey yo are getting graph data' ,action,  action.data);
+  console.log('hey are you getting graph data?', action, action.hackerNewsData);
   switch (action.type) {
     case hackerNewsActionTypes.FETCH_DATA_REQUEST: {
       return { ...state, loading: true };
     }
+
     case hackerNewsActionTypes.FETCH_DATA_SUCCESS: {
       state.loading = false;
       state.hackerNewsData = action.data;
       state.hackerNewsGraphData = action.data.hackerNewsGraphData;
       return state;
     }
+
     case hackerNewsActionTypes.FETCH_DATA_ERROR: {
       return { ...state, loading: true, errors: '' };
     }
@@ -50,13 +53,28 @@ const hackerNewsReducer = (state = initialState, action) => {
     }
     case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_SUCCESS: {
       state.loading = false;
-      state.hackerNewsData.hits.splice(action.index,1);
-      state.hackerNewsData.hackerNewsGraphData.splice(action.index,1);
+      state.hackerNewsData.hits.splice(action.index, 1);
+      state.hackerNewsData.hackerNewsGraphData.splice(action.index, 1);
       return state;
     }
     case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_ERROR: {
       return { ...state, loading: true, errors: action };
     }
+
+    // update Presist data in redux state//
+    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_REQUEST: {
+      return { ...state, loading: true };
+    }
+    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_SUCCESS: {
+      state.loading = false;
+      state.hackerNewsData = action.hackerNewsData;
+      state.hackerNewsGraphData = action.hackerNewsData.hackerNewsGraphData;
+      return state;
+    }
+    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_ERROR: {
+      return { ...state, loading: true, errors: action };
+    }
+
 
     // fecth user details //
     case hackerNewsUserActionTypes.FETCH_USER_REQUEST: {
@@ -64,8 +82,7 @@ const hackerNewsReducer = (state = initialState, action) => {
     }
     case hackerNewsUserActionTypes.FETCH_USER_SUCCESS: {
       state.loading = false;
-      state.hackerNewsUserData = action;
-      return state;
+     return state;
     }
     case hackerNewsUserActionTypes.FETCH_USER_ERROR: {
       return { ...state, loading: true, errors: action };

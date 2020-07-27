@@ -7,31 +7,37 @@ import { Container, Col, Row } from 'react-bootstrap';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Label } from 'recharts';
 import  ResponsiveContainer  from '../components/ResponsiveContainer/responsiveContainer';
 import { fetchDataRequest, updateVoteCountRequest, deletehackerNewDataRequest } from '../store/home/actions';
+import { useStickyState } from './CustomHooks';
 import Icons from '../themes/icons';
 import Images from '../themes/images';
 import '../styles/index.css';
 
 const hackerNews = (props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  console.log('this one is loading')
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(1);
   const [prevActive, setPrevActive] = useState(true);
   const [nextActive, setNextActive] = useState(false);
   const [dataPerPage, setDataPerPage] = useState(10);
 
+  
   let hackerNewsData = useSelector((state) => {
     return state.hackerNews.hackerNewsData;
   });
-
+  
   let loader = useSelector((state) => {
     return state.hackerNews.loading;
   });
-
+  
   let hackerNewsGraphData = useSelector((state) => {
     return state.hackerNews.hackerNewsGraphData;
   });
 
+  useEffect(() => {
+      const params = {id: 1}
+      dispatch(fetchDataRequest(params));
+    // eslint-disable-next-line
+  }, []);
+  
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -39,7 +45,7 @@ const hackerNews = (props) => {
     const indexOfFirstTodo = indexOfLastTodo - dataPerPage;
     !!hackerNewsData && !!hackerNewsData.hits && hackerNewsData.hits.length > 0 && hackerNewsData.hits.slice(indexOfFirstTodo, indexOfLastTodo);
 
-  }, []);
+  }, [dataPerPage, hackerNewsData, pageNumber]);
 
 
   const dispatchMyAction = useCallback(() => {
@@ -52,20 +58,12 @@ const hackerNews = (props) => {
   }, [ pageNumber ])
 
   useEffect(() => {
-    console.log('whats the pagenumber', pageNumber);
-    dispatchMyAction()
+   dispatchMyAction()
   }, [dispatchMyAction, pageNumber]);
 
   const handleScroll = () => {
     window.scrollTo(0, 400);
   };
-
-  const params = { id: pageNumber };
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffect(() => {
-    dispatch(fetchDataRequest(params));
-    // eslint-disable-next-line
-  }, []);
 
   const voteCount = (index) => {
     hackerNewsData.hits[index].points = hackerNewsData.hits[index].points + 1;
@@ -91,7 +89,6 @@ const hackerNews = (props) => {
     const params = { index : index}
     dispatch(deletehackerNewDataRequest(params));
   } 
-
   return (
     <Container fluid>
       <Row>
