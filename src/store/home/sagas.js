@@ -1,56 +1,52 @@
 import { call, all, put, takeLatest } from 'redux-saga/effects';
 import api from '../../services/index';
 
-import {  hackerNewsActionTypes , hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes, hackerNewsUpdatePresistTypes } from '../constants';
+import {
+  libraryManagementAction
+} from './actions';
 
-function* handleFetch(requets) {
-    const { payload } = requets;
-    try {
-        const response = yield call(api.searchStories, payload);  
-        const hackerNewsGraphData =[];
-        response.data.hits.map((data=>
-           hackerNewsGraphData.push({name: data.objectID, uv: data.points, pv: 2400, amt: 2400})
-        ))
-        const data = {...response.data, hackerNewsGraphData};
-        yield put({ type: 'FETCH_DATA_SUCCESS', data });
-    } catch (err) {
-       yield put({type: 'FETCH_DATA_ERROR', ...err});
-    }
-}
-
-function* handleUpdateVoteCount(requets) {
-    const { payload } = requets;
-    try {
-      yield put({ type: 'UPDATE_VOTE_COUNT_SUCCESS', ...payload});
-    } catch (err) {
-      yield put({type: 'UPDATE_VOTE_COUNT_ERROR', ...err});
-    }
-}
-
-function* handleDeleteData(requets) {
+function* handleFetchBookList(requets) {
   const { payload } = requets;
-   try {
-    yield put({ type: 'HACKER_NEWS_DELETE_DATA_SUCCESS', ...payload});
-  } catch (err) {
-    yield put({type: 'HACKER_NEWS_DELETE_DATA_ERROR', ...err});
+  try {
+    const response = yield call(api.getBooks, payload);
+    yield put(libraryManagementAction.fetchBooksDataSuccess(response.data));
+  } catch (error) {
+    yield put(libraryManagementAction.fetchBooksDataError(error));
   }
 }
 
-function* updatePresistData(requets) {
+function* handlefetchBookDetails(requets) {
   const { payload } = requets;
-   console.log('345345345345', 'i am calling 1', payload);
-   try {
-    yield put({ type: 'HACKER_NEWS_PERSIST_DATA_SUCCESS', ...payload});
+  try {
+    yield put(libraryManagementAction.fetchBookDetailsSuccess(payload));
   } catch (err) {
-    yield put({type: 'HACKER_NEWS_PERSIST_DATA_ERROR', ...err});
+    yield put(libraryManagementAction.fetchBookDetailsError(err));
   }
 }
 
-export function* hackerNewsData() {     
-    yield all([
-        yield takeLatest(hackerNewsActionTypes.FETCH_DATA_REQUEST, handleFetch),
-        yield takeLatest(hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST, handleUpdateVoteCount), 
-        yield takeLatest(hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST, handleDeleteData),
-        yield takeLatest(hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_REQUEST, updatePresistData)
-      ]);
+function* handlefetchEmptyBooksList(requets) {
+  const { payload } = requets;
+ try {
+    yield put(libraryManagementAction.fetchEmptyListSuccess(payload));
+  } catch (err) {
+    yield put(libraryManagementAction.fetchEmptyListError(err));
+  }
+}
+
+function* handleUserBorrowedBooksList(requets) {
+  const { payload } = requets;
+  try {
+    yield put(libraryManagementAction.userBorrowedBooksListSuccess(payload));
+  } catch (err) {
+    yield put(libraryManagementAction.userBorrowedBooksListError(err));
+  }
+}
+
+export function* libraryManagementSagas() {
+  yield all([
+    yield takeLatest(libraryManagementAction.FETCH_BOOKS_DATA_REQUEST, handleFetchBookList),
+    yield takeLatest(libraryManagementAction.FETCH_BOOKS_DETAILS_REQUEST, handlefetchBookDetails),
+    yield takeLatest(libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST, handlefetchEmptyBooksList),
+    yield takeLatest(libraryManagementAction.USER_BORROWED_BOOKS_LIST_REQUEST, handleUserBorrowedBooksList)
+  ]);
 }

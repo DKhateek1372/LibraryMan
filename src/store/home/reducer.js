@@ -1,96 +1,94 @@
-import {
-  hackerNewsActionTypes,
-  hackerNewsUserActionTypes,
-  hackerNewsVoteCountActionTypes,
-  hackerNewsDeleteActionTypes,
-  hackerNewsUpdatePresistTypes
-} from '../constants';
+import { libraryManagementAction } from './actions';
 
 const initialState = {
   loading: true,
-  hackerNewsData: {},
-  hackerNewsGraphData: []
+  libraryData: [],
+  borrowedBooks: []
 };
 
-const hackerNewsReducer = (state = initialState, action) => {
+
+
+const libraryManagementReducer = (state = initialState, action) => {
 
   // fecth initial data from search //
-  console.log('hey are you getting graph data?', action, action.hackerNewsData);
   switch (action.type) {
-    case hackerNewsActionTypes.FETCH_DATA_REQUEST: {
-      return { ...state, loading: true };
+    case libraryManagementAction.FETCH_BOOKS_DATA_REQUEST: {
+      return { ...state };
     }
 
-    case hackerNewsActionTypes.FETCH_DATA_SUCCESS: {
+    case libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS: {
+      let data = Object.assign([], action.payload);
+      !!data && data.items.forEach((element, index) => {
+        element.key = index;
+      });
       state.loading = false;
-      state.hackerNewsData = action.data;
-      state.hackerNewsGraphData = action.data.hackerNewsGraphData;
+      state.libraryData = data;
       return state;
-    }
-
-    case hackerNewsActionTypes.FETCH_DATA_ERROR: {
-      return { ...state, loading: true, errors: '' };
     }
 
     // update vote count //
-    case hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST: {
+    case libraryManagementAction.FETCH_BOOKS_DETAILS_REQUEST: {
       return { ...state, loading: true };
     }
-    case hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_SUCCESS: {
+    case libraryManagementAction.FETCH_BOOKS_DETAILS_SUCCESS: {
+      let data = Object.assign([],state.libraryData &&state.libraryData.items  );
+      let BookKey = action.payload.key;
+      const bookDetails = data.filter(data =>
+        data.key.toString().includes(BookKey)
+      );
       state.loading = false;
-      state.hackerNewsData = action.hackerNewsData;
-      state.hackerNewsGraphData[action.key].uv = action.hackerNewsData.hits[action.key].points;
+      state.libraryData= bookDetails;
       return state;
     }
-    case hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_ERROR: {
-      return { ...state, loading: true, errors: action };
-    }
 
-
-    // update vote count //
-    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST: {
-      return { ...state, loading: true };
-    }
-    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_SUCCESS: {
-      state.loading = false;
-      state.hackerNewsData.hits.splice(action.index, 1);
-      state.hackerNewsData.hackerNewsGraphData.splice(action.index, 1);
-      return state;
-    }
-    case hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_ERROR: {
-      return { ...state, loading: true, errors: action };
-    }
 
     // update Presist data in redux state//
-    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_REQUEST: {
+    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST: {
       return { ...state, loading: true };
     }
-    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_SUCCESS: {
+    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_SUCCESS: {
       state.loading = false;
-      state.hackerNewsData = action.hackerNewsData;
-      state.hackerNewsGraphData = action.hackerNewsData.hackerNewsGraphData;
+      // state.hackerNewsData = action.hackerNewsData;
+      // state.hackerNewsGraphData = action.hackerNewsData.hackerNewsGraphData;
       return state;
     }
-    case hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_ERROR: {
-      return { ...state, loading: true, errors: action };
-    }
+
 
 
     // fecth user details //
-    case hackerNewsUserActionTypes.FETCH_USER_REQUEST: {
+    case libraryManagementAction.USER_BORROWED_BOOKS_LIST_REQUEST: {
       return { ...state, loading: true };
     }
-    case hackerNewsUserActionTypes.FETCH_USER_SUCCESS: {
+    case libraryManagementAction.USER_BORROWED_BOOKS_LIST_SUCCESS: {
+      let myBooks =[];
+      let data = Object.assign([],state.libraryData &&state.libraryData.items  );
+      let BookKey = action.payload.key;
+      const bookDetails = data.filter(data =>
+        data.key.toString().includes(BookKey)
+      );
+      myBooks.concat(bookDetails);
+      const length = myBooks.length;
+      const borrowedBooks =  myBooks.length > 0 ? myBooks.splice(1, length): myBooks
+      state.borrowedBooks = borrowedBooks;
       state.loading = false;
-     return state;
-    }
-    case hackerNewsUserActionTypes.FETCH_USER_ERROR: {
-      return { ...state, loading: true, errors: action };
+      return state;
     }
 
+
+    case libraryManagementAction.FETCH_BOOKS_DATA_ERROR:
+    case libraryManagementAction.FETCH_BOOKS_DETAILS_ERROR:
+    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_ERROR:
+    case libraryManagementAction.USER_BORROWED_BOOKS_LIST_ERROR:
+      {
+        return {
+          ...state,
+          loading: true,
+          errors: ''
+        };
+      }
     default:
       return state;
   }
 };
 
-export default hackerNewsReducer;
+export default libraryManagementReducer;

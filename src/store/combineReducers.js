@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-import hackerNewsReducer from './home/reducer';
-import hackerNewsSearchReducer from './search/reducer';
+import libraryManagementReducer from './home/reducer';
 
 export const createRootReducer = history =>
   combineReducers({
     router: connectRouter(history),
-    hackerNews: hackerNewsReducer,
-    hackerNewsSearch : hackerNewsSearchReducer
+    libraryManagement: libraryManagementReducer,
 })

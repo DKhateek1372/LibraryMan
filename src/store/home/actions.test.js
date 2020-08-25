@@ -1,4 +1,3 @@
-// import { fetchDataRequest , updateVoteCountRequest} from './actions';
 import * as actions from './actions';
 import listItemData from '../../../data-for-testing';
 
@@ -11,7 +10,7 @@ describe('actions', () => {
       type: 'FETCH_DATA_REQUEST',
       payload:payload,
     };
-    expect(actions.fetchDataRequest(payload)).toEqual(expectedAction);
+    expect(actions.fetchBooksDataRequest(payload)).toEqual(expectedAction);
   });
 
   it('should dispatch an action to update the vote count', () => {
@@ -20,6 +19,6 @@ describe('actions', () => {
       type: 'UPDATE_VOTE_COUNT_REQUEST',
       payload:payload,
     };
-    expect(actions.updateVoteCountRequest(payload)).toEqual(expectedAction);
+    expect(actions.fetchBookDetailsRequest(payload)).toEqual(expectedAction);
   });
 });

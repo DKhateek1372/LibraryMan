@@ -1,6 +1,10 @@
 .width100{
 width: 100%;
 }
+
+.width50{
+    width: 100%;
+    }
 .centerAlign{
 text-align: center;
 }
@@ -43,28 +47,6 @@ text-align: center;
 background-color: #320033;
 color: white;
 }
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th{
-    padding: 1rem;
-    text-align: left;
-  }
-  
-  td{
-    text-align: left;
-    padding: 1rem;
-  }
-
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
 .border{
     border: 2px solid #f60;
 }
@@ -91,9 +73,18 @@ table {
     display: flex;
 }
 
+.inFlex{
+    display: inline-flex;
+}
+
+.flex-Cloumn{
+    flex-direction: row;
+}
+
 .text-3xl {
     font-size: 1.875rem;
     font-weight: inherit;
+    text-align: center;
 }
 
 .text-xl {
@@ -230,7 +221,62 @@ table {
     cursor: pointer;
 }
 
-td a {
-        color: inherit;
-        text-decoration: inherit;
+.txt{
+    /* position: fixed; */
+   margin-top: 25vw;
+   /* width: 50%; */
+   text-align: center
+}
+.txt:focus{
+    margin-top: 5
+} 
+
+.marginBooks{
+    margin: 2rem 5rem;
+}
+
+.searchBooks{
+    padding: 1rem 3rem;
+    border-radius: 15px;
+    border: 1px solid #e5e5e5;
+    color: black;
+    width: 85%;
+    margin: 2rem 5rem;
+    font-size: 1rem;
+}
+
+.parent{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.BookShell{
+    border: 1px solid #e5e5e5;
+    margin: 0.5rem 0 0.5rem 2rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    flex: 1 0 25%;
+    display: flex;
+}
+
+.btnPreview{
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }

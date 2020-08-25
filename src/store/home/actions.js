@@ -1,89 +1,91 @@
-import { hackerNewsActionTypes, hackerNewsUserActionTypes, hackerNewsVoteCountActionTypes, hackerNewsDeleteActionTypes, hackerNewsUpdatePresistTypes } from '../constants';
-
-// export named actions
-export const fetchDataRequest = params => {
-    console.log('hye you you are getting params?', params);
-    return { 
-        type: hackerNewsActionTypes.FETCH_DATA_REQUEST, 
-        payload: params 
-     }; 
-}
-
-export const fetchDataSuccess = data =>
-{
-    console.log('how many times i am calling for data?', data);
-    return { 
-        type: hackerNewsActionTypes.FETCH_DATA_SUCCESS, 
-        payload: data 
-     }; 
-}
-
-export const fetchDataError = message => ({ 
-    type: hackerNewsActionTypes.FETCH_DATA_ERROR,
-    payload: message 
-});
-
-export const fetchUserRequest = params => 
- ({ 
-     type: hackerNewsUserActionTypes.FETCH_USER_REQUEST, 
-     payload: params 
- });
-export const fetchUserSuccess = data => 
-({ 
-    type: hackerNewsUserActionTypes.FETCH_USER_SUCCESS,
-    payload: data 
-});
-export const fetchUserError = message => ({ 
-    type: hackerNewsUserActionTypes.FETCH_USER_ERROR,
-    payload: message 
-});
+export const libraryManagementAction = {
 
 
-export const updateVoteCountRequest = params => 
- ({ 
-     type: hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_REQUEST, 
-     payload: params 
- });
-export const updateVoteCountSuccess = data => 
-({ 
-    type: hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_SUCCESS,
-    payload: data 
-});
-export const updateVoteCountError = message => ({ 
-    type: hackerNewsVoteCountActionTypes.UPDATE_VOTE_COUNT_ERROR,
-    payload: message 
-});
+    FETCH_BOOKS_DATA_REQUEST: 'FETCH_BOOKS_DATA_REQUEST',
+    FETCH_BOOKS_DATA_SUCCESS: 'FETCH_BOOKS_DATA_SUCCESS',
+    FETCH_BOOKS_DATA_ERROR: 'FETCH_BOOKS_DATA_ERROR',
+
+    fetchBooksDataRequest: params => ({
+        type: libraryManagementAction.FETCH_BOOKS_DATA_REQUEST,
+        payload: params
+    }),
+
+   fetchBooksDataSuccess: data =>
+        ({
+            type: libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS,
+            payload: data
+        }),
+
+   fetchBooksDataError: message => ({
+        type: libraryManagementAction.FETCH_BOOKS_DATA_ERROR,
+        payload: message
+    }),
+
+    FETCH_BOOKS_DETAILS_REQUEST: 'FETCH_BOOKS_DETAILS_REQUEST',
+    FETCH_BOOKS_DETAILS_SUCCESS: 'FETCH_BOOKS_DETAILS_SUCCESS',
+    FETCH_BOOKS_DETAILS_ERROR: 'FETCH_BOOKS_DETAILS_ERROR',
+
+    fetchBookDetailsRequest: params => ({
+        type: libraryManagementAction.FETCH_BOOKS_DETAILS_REQUEST,
+        payload: params
+    }),
+
+    fetchBookDetailsSuccess: data =>
+        ({
+            type: libraryManagementAction.FETCH_BOOKS_DETAILS_SUCCESS,
+            payload: data
+        }),
+
+    fetchBookDetailsError: message => ({
+        type: libraryManagementAction.FETCH_BOOKS_DETAILS_ERROR,
+        payload: message
+    }),
 
 
-export const deletehackerNewDataRequest = params => 
- ({ 
-     type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_REQUEST, 
-     payload: params 
- });
-export const deletehackerNewDataSuccess = data => 
-({ 
-    type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_SUCCESS,
-    payload: data 
-});
-export const deletehackerNewDataError = message => ({ 
-    type: hackerNewsDeleteActionTypes.HACKER_NEWS_DELETE_DATA_ERROR,
-    payload: message 
-});
+    FETCH_BOOKS_EMPTYLIST_REQUEST: 'FETCH_BOOKS_EMPTYLIST_REQUEST',
+    FETCH_BOOKS_EMPTYLIST_SUCCESS: 'FETCH_BOOKS_EMPTYLIST_SUCCESS',
+    FETCH_BOOKS_EMPTYLIST_ERROR: 'FETCH_BOOKS_EMPTYLIST_ERROR',
+
+    fetchEmptyListRequest: params =>
+        ({
+            type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST,
+            payload: params
+        }),
+    fetchEmptyListSuccess: data =>
+        ({
+            type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_SUCCESS,
+            payload: data
+        }),
+    fetchEmptyListError: message => ({
+        type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_ERROR,
+        payload: message
+    }),
+
+
+    USER_BORROWED_BOOKS_LIST_REQUEST: 'USER_BORROWED_BOOKS_LIST_REQUEST',
+    USER_BORROWED_BOOKS_LIST_SUCCESS: 'USER_BORROWED_BOOKS_LIST_SUCCESS',
+    USER_BORROWED_BOOKS_LIST_ERROR: 'USER_BORROWED_BOOKS_LIST_ERROR',
+
+    userBorrowedBooksListRequest: params =>
+        ({
+            type: libraryManagementAction.USER_BORROWED_BOOKS_LIST_REQUEST,
+            payload: params
+        }),
+    userBorrowedBooksListSuccess: data =>
+        ({
+            type: libraryManagementAction.USER_BORROWED_BOOKS_LIST_SUCCESS,
+            payload: data
+        }),
+    userBorrowedBooksListError: message => ({
+        type: libraryManagementAction.USER_BORROWED_BOOKS_LIST_ERROR,
+        payload: message
+    }),
+
+};
 
 
 
-export const updatePresistDataRequest = params => 
- ({ 
-     type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_REQUEST, 
-     payload: params 
- });
-export const updatePresistDataSuccess = data => 
-({ 
-    type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_SUCCESS,
-    payload: data 
-});
-export const updatePresistDataError = message => ({ 
-    type: hackerNewsUpdatePresistTypes.HACKER_NEWS_PERSIST_DATA_ERROR,
-    payload: message 
-});
+
+
+
 

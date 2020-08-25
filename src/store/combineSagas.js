@@ -1,13 +1,11 @@
 
 import { all, call } from 'redux-saga/effects';
 
-import { hackerNewsData } from './home/sagas';
-import { hackerNewsSearchData} from './search/sagas';
+import { libraryManagementSagas } from './home/sagas';
 
 export default function* rootSaga() {
   yield all([
-    call(hackerNewsData),
-    call(hackerNewsSearchData) 
+    call(libraryManagementSagas),
   ]);
 }
 

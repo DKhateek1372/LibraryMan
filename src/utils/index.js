@@ -1,8 +1,8 @@
-const utils = { 
+const utils = {
     deviceIsWeb: window.innerWidth >= 680,
-   
+
     checkAPIfailure: res => {
-         res = res.hasOwnProperty('data') ? res.data : res;
+        res = res.hasOwnProperty('data') ? res.data : res;
         if (!!res && res.hasOwnProperty('status') && res.status !== 200) {
             return res.data;
         } else {
@@ -25,5 +25,26 @@ const utils = {
                 return unique;
             }, []);
     },
+
+    limitText: (title, limit) => {
+        const newTitle = [];
+
+        if (limit === -1) {
+            return title;
+        }
+
+        const length = title ? title.length : 0;
+
+        if (length >= limit) {
+            title.split('').reduce((acc, cur) => {
+                if (acc + cur.length <= limit) {
+                    newTitle.push(cur);
+                }
+                return acc + cur.length;
+            }, 0);
+            return `${newTitle.join('') + '...'}`;
+        }
+        return title;
+    }
 };
 export default utils;
