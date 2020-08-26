@@ -3,12 +3,11 @@ import { libraryManagementAction } from './actions';
 const initialState = {
   loading: true,
   libraryData: [],
+  bookDetails:[],
   addBooks:[],
   borrowedBooks: [],
   myBooks :[]   
 };
-
-
 
 const libraryManagementReducer = (state = initialState, action) => {
 
@@ -20,6 +19,7 @@ const libraryManagementReducer = (state = initialState, action) => {
 
     case libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS: {
       let data = Object.assign([], action.payload);
+      console.log("@6783456387456ertert",data, action.payload);
       !!data && data.items.forEach((element, index) => {
         element.key = index;
       });
@@ -33,13 +33,14 @@ const libraryManagementReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case libraryManagementAction.FETCH_BOOKS_DETAILS_SUCCESS: {
-      let data = Object.assign([],state.libraryData &&state.libraryData.items  );
+      let data = Object.assign([],state.libraryData && state.libraryData.items);
+      console.log("@6783456387456ertert",data,  state.libraryData);
       let BookKey = action.payload.key;
       const bookDetails = data.filter(data =>
         data.key.toString().includes(BookKey)
       );
       state.loading = false;
-      state.libraryData= bookDetails;
+      state.bookDetails= bookDetails;
       return state;
     }
 

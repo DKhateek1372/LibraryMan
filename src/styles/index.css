@@ -288,10 +288,26 @@ color: white;
     display: flex;
 }
 
+
+.btn-cart {
+        color: #fff !important;
+        background-color: #17a2b8 !important;
+        border-color: #17a2b8 !important;
+}
+
+.btnBorrow {
+    color: #fff !important;
+    background-color: #ffc107 !important;
+    border-color: #ffc107 !important;
+}
+
 .btnPreview{
     color: #fff !important;
     background-color: #007bff !important;
     border-color: #007bff !important;
+}
+
+.btn_Button{
     display: inline-block;
     font-weight: 400;
     color: #212529;

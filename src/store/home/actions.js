@@ -10,13 +10,12 @@ export const libraryManagementAction = {
         payload: params
     }),
 
-   fetchBooksDataSuccess: data =>
-        ({
-            type: libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS,
-            payload: data
-        }),
+    fetchBooksDataSuccess: data => ({
+        type: libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS,
+        payload: data
+    }),
 
-   fetchBooksDataError: message => ({
+    fetchBooksDataError: message => ({
         type: libraryManagementAction.FETCH_BOOKS_DATA_ERROR,
         payload: message
     }),

@@ -1,5 +1,5 @@
-import hackerNewsReducer from './reducer';
-import { hackerNewsActionTypes } from '../constants';
+import libraryManagementReducer from './reducer';
+import { libraryManagementAction } from './actions';
 import listItemData from '../../../data-for-testing';
 
 const initialState = {
@@ -8,39 +8,37 @@ const initialState = {
   hackerNewsGraphData: [],
 };
 
-console.log('1231231231', listItemData);
-
-console.log('here if condition is true', hackerNewsReducer(initialState,{  type: hackerNewsActionTypes.FETCH_DATA_SUCCESS}))
-
 describe('hackerNewsReducer reducer', () => {
  
   it('returns the initial state', () => {
-    expect(hackerNewsReducer(undefined, {})).toEqual({
+    expect(libraryManagementReducer(undefined, {})).toEqual({
       loading: true,
-      hackerNewsData: {},
-      hackerNewsGraphData: [],
+      libraryData: [],
+      bookDetails:[],
+      addBooks:[],
+      borrowedBooks: [],
+      myBooks :[]   
     });
   });
 
   it('should return the initial state', () => {
-    expect(hackerNewsReducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_REQUEST })).toEqual({
+    expect(libraryManagementReducer(initialState, { type: libraryManagementAction.FETCH_BOOKS_DATA_REQUEST})).toEqual({
       ...initialState,
       loading: true,
     });
   });
 
   it('should return the updated data state', () => {
-    expect(hackerNewsReducer(initialState,{
-        type: hackerNewsActionTypes.FETCH_DATA_SUCCESS,
+    expect(libraryManagementReducer(initialState,{
+        type: libraryManagementAction.FETCH_BOOKS_DATA_SUCCESS,
      })).toEqual({
       loading: false,
-      hackerNewsData:listItemData,
-      hackerNewsGraphData: listItemData.hackerNewsGraphData
+      libraryData: listItemData,
     });
   });
 
   it('handles failure', () => {
-    expect(hackerNewsReducer(initialState, { type: hackerNewsActionTypes.FETCH_DATA_ERROR  })).toEqual({
+    expect(libraryManagementReducer(initialState, { type: libraryManagementAction.FETCH_BOOKS_DATA_ERROR  })).toEqual({
       ...initialState,
       loading: true,
       errors: '',

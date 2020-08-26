@@ -1,17 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Col, Row } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import { Empty } from 'antd';
+import SweetAlert from 'react-bootstrap-sweetalert';
 import { libraryManagementAction } from '../store/home/actions';
 import Searchbar from '../components/UiSearch/index';
 import utils from '../utils/index';
-import Icons from '../themes/icons';
-import Images from '../themes/images';
 import '../styles/index.css';
 import 'antd/dist/antd.css'
-import { Empty } from 'antd';
 
 const booksList = (props) => {
   const dispatch = useDispatch();
@@ -22,9 +21,10 @@ const booksList = (props) => {
   const libraryData = useSelector((state) => {
     return state.libraryManagement.libraryData;
   });
+
   const [state, setState] = React.useState([]);
   const [myBooks, setMyBooks] = React.useState([]);
-
+  const [bookAdded, setBookAdded] = React.useState(false);
 
   useEffect(() => {
     dispatch(libraryManagementAction.fetchBooksDataRequest());
@@ -67,6 +67,7 @@ const booksList = (props) => {
     const borrowedBooks = length === 3 ? myBooks.splice(1, length) : myBooks;
     const params = { data: borrowedBooks }
     dispatch(libraryManagementAction.addBooksBorrowedRequest(params));
+    setBookAdded(true);
   };
 
   const getBookDetails = (key) => {
@@ -76,16 +77,20 @@ const booksList = (props) => {
     })
   };
 
-  const myCart = (key) => {
+  const myCart = () => {
     props.history.push({
       pathname: '/my-book-list',
     })
   };
 
-  const myLibrary = (key) =>{
+  const myLibrary = () =>{
     props.history.push({
       pathname: '/',
     })
+  }
+
+  const onConfirm = () =>{
+    setBookAdded(false);
   }
 
   return (
@@ -96,10 +101,10 @@ const booksList = (props) => {
             <h1 className="text-3xl">Library Management System</h1>{' '}
             <div className="flex flex-row">
               <div className="myCart items-start width50 ml-1">
-                <button variant="primary" className="btnPreview" onClick={() => myLibrary()}>Go To Library</button>{' '}
+                <button  className="btn_Button btnPreview" onClick={() => myLibrary()}>Go To Library</button>{' '}
               </div>
               <div className="myCart items-end width50 mr-1">
-                <button variant="primary" className="btnPreview" onClick={() => myCart()}> My Book Cart</button>{' '}
+                <button  className="btn_Button btn-cart" onClick={() => myCart()}> My Book Cart</button>{' '}
               </div>
             </div>
             <hr className="border mtl-6"></hr>
@@ -126,8 +131,8 @@ const booksList = (props) => {
                         <h5>Publisher: {!!book.volumeInfo.publisher ? book.volumeInfo.publisher : 'NA' + ' ' + book.volumeInfo.publishedDate} </h5>
                         <h5>Category: {book.volumeInfo.categories} </h5>
                         <h5>Description: {utils.limitText(!!book.volumeInfo.description ? book.volumeInfo.description : book.volumeInfo.subtitle, 100)}</h5>
-                        <button variant="primary" className="btnPreview" onClick={() => getBookDetails(book.key)}>Preview</button>{' '}
-                        <button variant="primary" className="btnPreview" onClick={() => getBooks(book.key)}>Borrow</button>{' '}
+                        <button  className="btn_Button btnPreview" onClick={() => getBookDetails(book.key)}>Preview</button>{' '}
+                        <button  className="btn_Button btnBorrow" onClick={() => getBooks(book.key)}>Borrow</button>{' '}
                       </Col>
                     </Col>
                   )
@@ -142,12 +147,21 @@ const booksList = (props) => {
           </Col>
         </Col>
       </Row>
+      <SweetAlert
+          title={"Book Added to Cart"}
+          show={bookAdded}
+          onConfirm={onConfirm}
+      />
     </Container>
   );
 };
 
 booksList.propTypes = {
-
+  publisher: PropTypes.string,
+  title:PropTypes.string,
+  key:PropTypes.string,
+  categories:PropTypes.string,
+  description:PropTypes.string,
 };
 
 export default booksList;

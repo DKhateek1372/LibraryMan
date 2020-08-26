@@ -1,71 +1,20 @@
 export const listItemData = [
   {
-    by: 'Mr NOBODY',
-    comments: 41,
-    objectID: 18277531,
-    hits: [],
-    score: 79,
-    time: 1540236259,
-    title: 'AWS CEO Jassy follows Apple in calling for retraction of Chinese spy chip story',
-    type: 'story',
-    url:
-      'https://www.cnbc.com/2018/10/22/aws-ceo-jassy-follows-apple-calls-for-spy-chip-story-retraction.html',
-    author: 'polm23',
-    comment_text: null,
-    created_at: '2020-07-21T06:02:38.000Z',
-    created_at_i: 1595311358,
-    parent_id: null,
-    points: 51,
-    story_id: null,
-    story_text: null,
-    story_title: null,
-    story_url: null,
-    hackerNewsGraphData:[]
-  },
-  {
     by: 'Deepak DK',
-    comments: 72,
-    objectID: 18276862,
-    hits: [],
-    score: 105,
-    time: 1540231727,
-    title: 'The Secretive Business of Facial-Recognition Software in Retail Stores',
-    type: 'story',
-    url:
-      'http://nymag.com/intelligencer/2018/10/retailers-are-using-facial-recognition-technology-too.html',
-    author: 'Deepak DK',
-    comment_text: null,
-    created_at: '2020-07-21T06:02:38.000Z',
-    created_at_i: 1595311358,
-    parent_id: null,
-    points: 51,
-    story_id: null,
-    story_text: null,
-    story_title: null,
-    story_url: null,
-    hackerNewsGraphData:[]
+    key: 0,
+    title: 'Atomic Habits',
+    publisher: 'Penguin',
+    categories: 'Business & Economics',
+    description:'Over 1 million copies sold! Tiny Changes, Remarkable Results No '
+   
   },
   {
     by: 'Sangha',
-    comments: 89,
-    hits: [  ],
-    score: 58,
-    url:
-      'http://nymag.com/intelligencer/2018/10/retailers-are-using-facial-recognition-technology-too.html',
-    title: 'The Secretive Business of Facial-Recognition Software in Retail Stores',
-    objectID: 18276862,
-    type: 'story',
-    time: 1540231778,
-    author: 'Sangha DK',
-    comment_text: null,
-    created_at: '2020-07-27T06:02:38.000Z',
-    created_at_i: 1595311568,
-    parent_id: null,
-    points: 51,
-    story_id: null,
-    story_text: null,
-    story_title: null,
-    story_url: null,
-    hackerNewsGraphData:[]
-  },
+    key: 1,
+    title: 'Atomic Habits Sangha',
+    publisher: 'Penguin Sangha',
+    categories: 'Business & Economics & Sangha',
+    description:'Over 1 million copies sold! Tiny Changes, Remarkable Results No & Sangha'
+    
+  }
 ];

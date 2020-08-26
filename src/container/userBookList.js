@@ -63,14 +63,34 @@ const booksList = (props) => {
     })
   }
 
+  const myCart = (key) => {
+    props.history.push({
+      pathname: '/my-book-list',
+    })
+  };
+
+  const myLibrary = (key) =>{
+    props.history.push({
+      pathname: '/',
+    })
+  }
+
   return (
     <Container fluid>
       <Row>
         <Col lg={12}>
           <Col className="text-hn-orange items-center justify-between">
             <h1 className="text-3xl">Library Management System</h1>{' '}
+            <div className="flex flex-row">
+              <div className="myCart items-start width50 ml-1">
+                <button  className="btn_Button btnPreview" onClick={() => myLibrary()}>Go To Library</button>{' '}
+              </div>
+              <div className="myCart items-end width50 mr-1">
+                <button  className="btn_Button btn-cart" onClick={() => myCart()}> My Book Cart</button>{' '}
+              </div>
+            </div>
             <hr className="border mtl-6"></hr>
-            <Searchbar bookSearchHandler={bookSearchHandler} searchBar={searchText} />{' '}
+            <Searchbar bookSearchHandler={bookSearchHandler} searchBar={searchText} />
             <div className="text-3xl items-center">My Books Cart</div>{' '}
           </Col>
           <Col lg={12} md={12} className="p-4 inFlex parent marginBooks">
