@@ -23,11 +23,11 @@ const booksList = (props) => {
     return state.libraryManagement.libraryData;
   });
   const [state, setState] = React.useState([]);
+  const [myBooks, setMyBooks] = React.useState([]);
 
 
   useEffect(() => {
-    const params = { id: 1 }
-    dispatch(libraryManagementAction.fetchBooksDataRequest(params));
+    dispatch(libraryManagementAction.fetchBooksDataRequest());
     // eslint-disable-next-line
   }, []);
 
@@ -58,6 +58,17 @@ const booksList = (props) => {
     searchText !== '' ? setState(data) : setState(libraryData && libraryData.items);
   }
 
+  const getBooks = (key) => {
+    const bookDetails = state.filter(data =>
+      data.key.toString().includes(key)
+    );
+    myBooks.push(bookDetails);
+    const length = myBooks.length;
+    const borrowedBooks = length === 3 ? myBooks.splice(1, length) : myBooks;
+    const params = { data: borrowedBooks }
+    dispatch(libraryManagementAction.addBooksBorrowedRequest(params));
+  };
+
   const getBookDetails = (key) => {
     props.history.push({
       pathname: 'bookDetails',
@@ -65,13 +76,17 @@ const booksList = (props) => {
     })
   };
 
-
-  const getBooks = (key) =>{
+  const myCart = (key) => {
     props.history.push({
-      pathname: 'my-book-list',
-      state: key,
+      pathname: '/my-book-list',
     })
   };
+
+  const myLibrary = (key) =>{
+    props.history.push({
+      pathname: '/',
+    })
+  }
 
   return (
     <Container fluid>
@@ -79,6 +94,14 @@ const booksList = (props) => {
         <Col lg={12}>
           <Col className="text-hn-orange items-center justify-between">
             <h1 className="text-3xl">Library Management System</h1>{' '}
+            <div className="flex flex-row">
+              <div className="myCart items-start width50 ml-1">
+                <button variant="primary" className="btnPreview" onClick={() => myLibrary()}>Go To Library</button>{' '}
+              </div>
+              <div className="myCart items-end width50 mr-1">
+                <button variant="primary" className="btnPreview" onClick={() => myCart()}> My Book Cart</button>{' '}
+              </div>
+            </div>
             <hr className="border mtl-6"></hr>
             <Searchbar bookSearchHandler={bookSearchHandler} searchBar={searchText} />
           </Col>
@@ -93,7 +116,7 @@ const booksList = (props) => {
                   Array.isArray(state) &&
                   state.length > 0 ?
                   state.map((book, index) => (
-                     <Col lg={4} md={4} key={index} className="BookShell">
+                    <Col lg={4} md={4} key={index} className="BookShell">
                       <Col lg={6} md={6} className="width50">
                         <img src={book.volumeInfo.imageLinks.thumbnail} alt="" />
                       </Col>
@@ -111,8 +134,8 @@ const booksList = (props) => {
                   )
                   :
                   (
-                    <Col lg={12} md={12} className="p-4 inFlex parent marginBooks" >
-                    <Empty />
+                    <Col lg={12} md={12} className="p-4 inFlex parent marginAuto" >
+                      <Empty />
                     </Col>
                   )
             }

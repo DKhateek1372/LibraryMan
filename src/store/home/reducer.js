@@ -3,7 +3,9 @@ import { libraryManagementAction } from './actions';
 const initialState = {
   loading: true,
   libraryData: [],
-  borrowedBooks: []
+  addBooks:[],
+  borrowedBooks: [],
+  myBooks :[]   
 };
 
 
@@ -43,16 +45,14 @@ const libraryManagementReducer = (state = initialState, action) => {
 
 
     // update Presist data in redux state//
-    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST: {
+    case libraryManagementAction.ADD_BOOKS_BORROWED_REQUEST: {
       return { ...state, loading: true };
     }
-    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_SUCCESS: {
+    case libraryManagementAction.ADD_BOOKS_BORROWED_SUCCESS: {
+      state.addBooks = action.payload;
       state.loading = false;
-      // state.hackerNewsData = action.hackerNewsData;
-      // state.hackerNewsGraphData = action.hackerNewsData.hackerNewsGraphData;
       return state;
     }
-
 
 
     // fecth user details //
@@ -60,16 +60,7 @@ const libraryManagementReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
     case libraryManagementAction.USER_BORROWED_BOOKS_LIST_SUCCESS: {
-      let myBooks =[];
-      let data = Object.assign([],state.libraryData &&state.libraryData.items  );
-      let BookKey = action.payload.key;
-      const bookDetails = data.filter(data =>
-        data.key.toString().includes(BookKey)
-      );
-      myBooks.concat(bookDetails);
-      const length = myBooks.length;
-      const borrowedBooks =  myBooks.length > 0 ? myBooks.splice(1, length): myBooks
-      state.borrowedBooks = borrowedBooks;
+      state.borrowedBooks = state.addBooks;
       state.loading = false;
       return state;
     }
@@ -77,7 +68,7 @@ const libraryManagementReducer = (state = initialState, action) => {
 
     case libraryManagementAction.FETCH_BOOKS_DATA_ERROR:
     case libraryManagementAction.FETCH_BOOKS_DETAILS_ERROR:
-    case libraryManagementAction.FETCH_BOOKS_EMPTYLIST_ERROR:
+    case libraryManagementAction.ADD_BOOKS_BORROWED_ERROR:
     case libraryManagementAction.USER_BORROWED_BOOKS_LIST_ERROR:
       {
         return {

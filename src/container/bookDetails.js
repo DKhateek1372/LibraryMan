@@ -30,7 +30,7 @@ const bookDetails = (props) => {
       libraryData
     )
   }, [libraryData]);
-  
+
   return (
     <Container fluid>
       <Row>
@@ -38,9 +38,10 @@ const bookDetails = (props) => {
           <Col className="text-hn-orange items-center justify-between">
             <h1 className="text-3xl">Library Management System</h1>{' '}
             <hr className="border mtl-6"></hr>
+            <div className="text-3xl items-center">Books Details</div>{' '}
           </Col>
           <Col lg={12} md={12} className="text-hn-orange items-center justify-between">
-            <div className="text-3xl"> Books Details</div>{' '}
+           
             {
               !!state &&
               Array.isArray(state) &&

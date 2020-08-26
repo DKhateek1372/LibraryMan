@@ -24,19 +24,18 @@ function* handlefetchBookDetails(requets) {
   }
 }
 
-function* handlefetchEmptyBooksList(requets) {
+function* addBooksBorrowedRequest(requets) {
   const { payload } = requets;
  try {
-    yield put(libraryManagementAction.fetchEmptyListSuccess(payload));
+  yield put(libraryManagementAction.addBooksBorrowedSuccess(payload.data));
   } catch (err) {
-    yield put(libraryManagementAction.fetchEmptyListError(err));
+    yield put(libraryManagementAction.addBooksBorrowedError(err));
   }
 }
 
-function* handleUserBorrowedBooksList(requets) {
-  const { payload } = requets;
-  try {
-    yield put(libraryManagementAction.userBorrowedBooksListSuccess(payload));
+function* handleUserBorrowedBooksList() {
+   try {
+    yield put(libraryManagementAction.userBorrowedBooksListSuccess());
   } catch (err) {
     yield put(libraryManagementAction.userBorrowedBooksListError(err));
   }
@@ -46,7 +45,7 @@ export function* libraryManagementSagas() {
   yield all([
     yield takeLatest(libraryManagementAction.FETCH_BOOKS_DATA_REQUEST, handleFetchBookList),
     yield takeLatest(libraryManagementAction.FETCH_BOOKS_DETAILS_REQUEST, handlefetchBookDetails),
-    yield takeLatest(libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST, handlefetchEmptyBooksList),
+    yield takeLatest(libraryManagementAction.ADD_BOOKS_BORROWED_REQUEST, addBooksBorrowedRequest),
     yield takeLatest(libraryManagementAction.USER_BORROWED_BOOKS_LIST_REQUEST, handleUserBorrowedBooksList)
   ]);
 }

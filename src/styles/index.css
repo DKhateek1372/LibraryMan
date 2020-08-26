@@ -67,6 +67,17 @@ color: white;
 
 .items-center {
     align-items: center;
+    text-align: center;
+}
+
+.items-start {
+    align-items: start;
+    text-align: start;
+}
+
+.items-end {
+    align-items: end;
+    text-align: end;
 }
 
 .flex {
@@ -78,6 +89,10 @@ color: white;
 }
 
 .flex-Cloumn{
+    flex-direction: column;
+}
+
+.flex-row{
     flex-direction: row;
 }
 
@@ -116,6 +131,14 @@ color: white;
 
 .mtl-6 {
     margin: 1rem 0 0 1rem;
+}
+
+.ml-1{
+    margin: 0 0 0 1rem; 
+}
+
+.mr-1{
+    margin: 0 1rem 0 0 ; 
 }
 .grid {
     display: grid;
@@ -234,6 +257,11 @@ color: white;
 .marginBooks{
     margin: 2rem 5rem;
 }
+
+.marginAuto{
+    margin: 0 auto;
+}
+
 
 .searchBooks{
     padding: 1rem 3rem;

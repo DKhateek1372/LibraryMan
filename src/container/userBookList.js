@@ -25,8 +25,7 @@ const booksList = (props) => {
   const [state, setState] = React.useState([]);
 
   useEffect(() => {
-    const params = { id: 1 }
-    dispatch(libraryManagementAction.fetchBooksDataRequest(params));
+     dispatch(libraryManagementAction.userBorrowedBooksListRequest());
     // eslint-disable-next-line
   }, []);
 
@@ -36,7 +35,7 @@ const booksList = (props) => {
 
   useEffect(() => {
     setState(
-      libraryData
+      libraryData && libraryData.flat()
     )
   }, [libraryData]);
 
@@ -71,9 +70,11 @@ const booksList = (props) => {
           <Col className="text-hn-orange items-center justify-between">
             <h1 className="text-3xl">Library Management System</h1>{' '}
             <hr className="border mtl-6"></hr>
-            <Searchbar bookSearchHandler={bookSearchHandler} searchBar={searchText} />
+            <Searchbar bookSearchHandler={bookSearchHandler} searchBar={searchText} />{' '}
+            <div className="text-3xl items-center">My Books Cart</div>{' '}
           </Col>
-          <Col lg={12} md={12} className="p-4 inFlex parent marginBooks" >
+          <Col lg={12} md={12} className="p-4 inFlex parent marginBooks">
+         
             {
               loader ? (
                 <div className="spinnerName">
@@ -101,7 +102,7 @@ const booksList = (props) => {
                   )
                   :
                   (
-                    <Col lg={12} md={12} className="p-4 inFlex parent marginBooks" >
+                    <Col lg={12} md={12} className="p-4 inFlex parent marginAuto" >
                     <Empty />
                     </Col>
                   )

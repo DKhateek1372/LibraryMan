@@ -42,22 +42,22 @@ export const libraryManagementAction = {
     }),
 
 
-    FETCH_BOOKS_EMPTYLIST_REQUEST: 'FETCH_BOOKS_EMPTYLIST_REQUEST',
-    FETCH_BOOKS_EMPTYLIST_SUCCESS: 'FETCH_BOOKS_EMPTYLIST_SUCCESS',
-    FETCH_BOOKS_EMPTYLIST_ERROR: 'FETCH_BOOKS_EMPTYLIST_ERROR',
+    ADD_BOOKS_BORROWED_REQUEST: 'ADD_BOOKS_BORROWED_REQUEST',
+    ADD_BOOKS_BORROWED_SUCCESS: 'ADD_BOOKS_BORROWED_SUCCESS',
+    ADD_BOOKS_BORROWED_ERROR: 'ADD_BOOKS_BORROWED_ERROR',
 
-    fetchEmptyListRequest: params =>
+    addBooksBorrowedRequest: params =>
         ({
-            type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_REQUEST,
+            type: libraryManagementAction.ADD_BOOKS_BORROWED_REQUEST,
             payload: params
         }),
-    fetchEmptyListSuccess: data =>
+    addBooksBorrowedSuccess: data =>
         ({
-            type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_SUCCESS,
+            type: libraryManagementAction.ADD_BOOKS_BORROWED_SUCCESS,
             payload: data
         }),
-    fetchEmptyListError: message => ({
-        type: libraryManagementAction.FETCH_BOOKS_EMPTYLIST_ERROR,
+    addBooksBorrowedError: message => ({
+        type: libraryManagementAction.ADD_BOOKS_BORROWED_ERROR,
         payload: message
     }),
 

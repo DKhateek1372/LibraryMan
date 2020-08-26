@@ -14,7 +14,7 @@ function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
-         <Route exact path="/home" component={books}/>
+         <Route exact path="/" component={books}/>
          <Route exact path="/bookDetails" component={bookDetails}/>
          <Route exact path="/my-book-list" component={userBookList}/>
         </BrowserRouter>
