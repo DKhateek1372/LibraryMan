@@ -104,5 +104,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-# HackerNewsReactHooks
+# Library Management System
 React Hooks, Redux Saga , Thunk &amp; context API

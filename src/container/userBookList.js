@@ -22,7 +22,20 @@ const booksList = (props) => {
   const libraryData = useSelector((state) => {
     return state.libraryManagement.borrowedBooks;
   });
+
+
   const [state, setState] = React.useState([]);
+
+
+  const bookData = useSelector((state) => {
+    return state.libraryManagement.libraryData;
+  });
+
+  useEffect(() => {
+    dispatch(libraryManagementAction.fetchBooksDataRequest());
+    // eslint-disable-next-line
+  }, []);
+
 
   useEffect(() => {
      dispatch(libraryManagementAction.userBorrowedBooksListRequest());
@@ -53,7 +66,7 @@ const booksList = (props) => {
         data.volumeInfo.title.toLowerCase().includes(searchText) ||
         data.key.toString().includes(searchText)
       );
-    searchText !== '' ? setState(data) : setState(libraryData && libraryData.items);
+    searchText !== '' ? setState(data) : setState( libraryData && libraryData.flat());
   }
 
   const getBookDetails = (key) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import hackerNews from '../container/hackerNews';
+
 
 class CustomRoute extends React.Component {
     constructor(props) {
@@ -21,7 +21,6 @@ class CustomRoute extends React.Component {
     render() {
      return(
         <React.Fragment>
-            <Route exact path="/:id" component={hackerNews}/>
         </React.Fragment>
      )
     }

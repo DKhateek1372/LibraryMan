@@ -4,11 +4,14 @@ import listItemData from '../../../data-for-testing';
 
 const initialState = {
   loading: true,
-  hackerNewsData: {},
-  hackerNewsGraphData: [],
+  libraryData: [],
+      bookDetails:[],
+      addBooks:[],
+      borrowedBooks: [],
+      myBooks :[]   
 };
 
-describe('hackerNewsReducer reducer', () => {
+describe('libraryManagementReducer reducer', () => {
  
   it('returns the initial state', () => {
     expect(libraryManagementReducer(undefined, {})).toEqual({

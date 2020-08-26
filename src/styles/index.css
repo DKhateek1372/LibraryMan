@@ -168,10 +168,7 @@ color: white;
     height: 100%;
 }
 
-.hackerMenu{
-    display: flex;
-    flex-direction: row;
-}
+
 
 .totalPages{
     width: 50%;

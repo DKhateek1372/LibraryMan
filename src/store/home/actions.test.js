@@ -14,7 +14,7 @@ describe('actions', () => {
   });
 
   it('should dispatch an action to update the vote count', () => {
-    const payload = {hackerNewsData: listItemData, key: 0 }
+    const payload = {libraryData: listItemData, key: 0 }
    const expectedAction = {
       type: 'UPDATE_VOTE_COUNT_REQUEST',
       payload:payload,
